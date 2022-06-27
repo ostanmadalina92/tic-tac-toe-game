@@ -78,6 +78,30 @@ body {
   color: var(--color-yellow);
 }
 
+.bg-light {
+  background-color: var(--color-gray);
+  color: var(--color-bg-dark);
+}
+
+.bg-yellow {
+  background-color: var(--color-yellow);
+  color: var(--color-bg-dark);
+}
+
+.bg-blue {
+  background-color: var(--color-blue);
+  color: var(--color-bg-dark);
+}
+
+.bg-blue.text-light, 
+.bg-blue .text-light,
+.bg-yellow.text-light,
+.bg-yellow .text-light,
+.bg-light.text-light, 
+.bg-light .text-light {
+  color: var(--color-bg-light);
+}
+
 .btn {
   background: var(--color-gray);
   border: none;
@@ -119,7 +143,23 @@ body {
 }
 
 .btn-sm:hover {
-  --shadow-y: 4px;
+  --shadow-y: 6px;
+}
+
+.btn-sm:active {
+  --shadow-y: 3px;
+}
+
+.shadow-gray {
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.shadow-blue {
+  box-shadow: 0 8px 0 var(--color-blue-dark);
+}
+
+.shadow-yellow {
+  box-shadow: 0 8px 0 var(--color-yellow-dark);
 }
 
 /* Icons */
@@ -199,4 +239,69 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* Board */
+
+.board__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.board__turn {
+  border-radius: 5px;
+  background-color: var(--color-bg-light);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.board__restart svg{
+  height: 20px;
+  display: flex;
+  align-items: center;
+  transform-origin: center;
+  transition: all 0.3s;
+}
+
+.board__restart:active svg {
+  transform: rotate(180deg);
+}
+
+.board__main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px 20px;
+}
+
+.board__main .card {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding-inline: 10px;
+}
+
+.board__main .active.shadow-blue{
+  background-color: var(--color-blue);
+}
+
+.board__main .active.shadow-yellow{
+  background-color: var(--color-yellow);
+}
+
+.board__footer {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.board__footer .card {
+  gap: 15px;
 }
