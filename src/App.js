@@ -1,5 +1,6 @@
 import Start from "./components/startgame/start";
 import Board from "./components/boardgame/board";
+import WinState from "./components/winstate/winState";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
         {/* <Start /> */}
         <Board />
       </div>
+      <WinState />
     </div>
   );
 }
