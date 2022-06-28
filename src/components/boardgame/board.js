@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Xicon from "../icons/Xicon";
 import Oicon from "../icons/Oicon";
 import BoardCard from "./boardCard";
+import { GameContext } from "../../context/GameContext";
 
 const Board = () => {
-  const squares = ["", "0", "x", "", "o", "x", "", "", ""];
+
+  const {squares} = useContext(GameContext);
   return (
     <div className="boards">
       <div className="board__header">
