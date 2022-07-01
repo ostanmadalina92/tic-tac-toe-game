@@ -3,10 +3,28 @@ import Xicon from "../icons/Xicon";
 import Oicon from "../icons/Oicon";
 import BoardCard from "./boardCard";
 import { GameContext } from "../../context/GameContext";
+import { WinStateContext } from "../../context/winStateContext";
 
 const Board = () => {
+  const { squares, xnext, ties, winner, winnerLine, playMode, activeUser } = useContext(GameContext);
 
-  const {squares} = useContext(GameContext);
+  const {showWinState, setWinStateMode} = useContext(WinStateContext);
+
+  const resetGame = () => {
+    showWinState();
+    setWinStateMode("start");
+  }
+
+  const checkUser = (user) => {
+    if(playMode === 'cpu'){
+      if(user === activeUser){
+        return "(you)"
+      } else {
+        return "(cpu)"
+      }
+    }
+  }
+
   return (
     <div className="boards">
       <div className="board__header">
@@ -15,10 +33,15 @@ const Board = () => {
           <Oicon />
         </div>
         <div className="board__turn">
-          <Xicon color="light" size="sm" /> turn
+          {!xnext ? (
+            <Xicon color="light" size="sm" />
+          ) : (
+            <Oicon color="light" size="sm" />
+          )}
+          turn
         </div>
         <div>
-          <button className="btn btn-sm board__restart">
+          <button className="btn btn-sm board__restart" onClick={resetGame}>
             <svg
               aria-hidden="true"
               focusable="false"
@@ -37,21 +60,26 @@ const Board = () => {
       </div>
       <div className="board__main">
         {squares.map((sq, ix) => (
-          <BoardCard key={ix} index={ix} user={sq} active={ix === 5} />
+          <BoardCard
+            key={ix}
+            index={ix}
+            user={sq}
+            active={winner && winnerLine && winnerLine.includes(ix)}
+          />
         ))}
       </div>
       <div className="board__footer">
         <div className="card bg-blue">
-          <p className="text-light">x (you)</p>
-          <strong className="text-2xl">10</strong>
+          <p className="text-light">x {checkUser("x")}</p>
+          <strong className="text-2xl">{ties.x}</strong>
         </div>
         <div className="card bg-light">
           <p className="text-light">ties</p>
-          <strong className="text-2xl">20</strong>
+          <strong className="text-2xl">{ties.x + ties.o}</strong>
         </div>
         <div className="card bg-yellow">
-          <p className="text-light">o (cpu)</p>
-          <strong className="text-2xl">10</strong>
+          <p className="text-light">o {checkUser("o")}</p>
+          <strong className="text-2xl">{ties.o}</strong>
         </div>
       </div>
     </div>
