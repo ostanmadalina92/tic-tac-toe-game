@@ -8,7 +8,7 @@ const Restart = () => {
 
   return (
     <div className="restart">
-      <h3 className="restart__title">Restart Game ?</h3>
+      <h2 className="restart__title">Restart Game ?</h2>
       <div className="restart__btns">
         <button className="btn btn-sm" onClick={hideWinState}>
           

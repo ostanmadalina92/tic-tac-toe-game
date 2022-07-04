@@ -10,14 +10,14 @@ const Win = () => {
       {winner && winner !== "no" ? (
         <>
           <p>you win!</p>
-          <h3
+          <h2
             className={`score__title ${
               winner === "o" ? "text-yellow" : "text-blue"
             }`}
           >
             {winner === "x" ? <Xicon /> : <Oicon />}
             Takes the round
-          </h3>
+          </h2>
         </>
       ) : (
         <h3 className="score__title text-yellow">No Winner</h3>
