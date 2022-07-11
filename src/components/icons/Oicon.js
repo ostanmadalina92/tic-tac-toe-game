@@ -2,18 +2,8 @@ import React from "react";
 
 const Oicon = ({ color, size }) => {
   return (
-    <div
-      className={`icon ${color ? "icon-" + color : "icon-yellow"} ${
-        size && "icon-" + size
-      }`}
-    >
-      <svg
-        version="1.1"
-        id="Layer_1"
-        x="0px"
-        y="0px"
-        viewBox="-169 -35 100 100"
-      >
+    <div className={`icon ${color ? "icon-" + color : "icon-yellow"} ${size && "icon-" + size}`}>
+      <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="-169 -35 100 100">
         <g>
           <path
             d="M-119,56.2c-22.7,0-41.2-18.5-41.2-41.2s18.5-41.2,41.2-41.2c22.7,0,41.2,18.5,41.2,41.2S-96.3,56.2-119,56.2z M-119-8

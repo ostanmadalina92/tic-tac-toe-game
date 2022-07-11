@@ -8,22 +8,22 @@ import { WinStateContext } from "../../context/winStateContext";
 const Board = () => {
   const { squares, xnext, ties, winner, winnerLine, playMode, activeUser } = useContext(GameContext);
 
-  const {showWinState, setWinStateMode} = useContext(WinStateContext);
+  const { showWinState, setWinStateMode } = useContext(WinStateContext);
 
   const resetGame = () => {
     showWinState();
     setWinStateMode("start");
-  }
+  };
 
-  const checkUser = (user) => {
-    if(playMode === 'cpu'){
-      if(user === activeUser){
-        return "(you)"
+  const checkUser = user => {
+    if (playMode === "cpu") {
+      if (user === activeUser) {
+        return "(you)";
       } else {
-        return "(cpu)"
+        return "(cpu)";
       }
     }
-  }
+  };
 
   return (
     <div className="boards">
@@ -33,11 +33,7 @@ const Board = () => {
           <Oicon />
         </div>
         <div className="board__turn">
-          {!xnext ? (
-            <Xicon color="light" size="sm" />
-          ) : (
-            <Oicon color="light" size="sm" />
-          )}
+          {!xnext ? <Xicon color="light" size="sm" /> : <Oicon color="light" size="sm" />}
           turn
         </div>
         <div>
@@ -60,12 +56,7 @@ const Board = () => {
       </div>
       <div className="board__main">
         {squares.map((sq, ix) => (
-          <BoardCard
-            key={ix}
-            index={ix}
-            user={sq}
-            active={winner && winnerLine && winnerLine.includes(ix)}
-          />
+          <BoardCard key={ix} index={ix} user={sq} active={winner && winnerLine && winnerLine.includes(ix)} />
         ))}
       </div>
       <div className="board__footer">

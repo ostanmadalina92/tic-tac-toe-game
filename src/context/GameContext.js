@@ -4,9 +4,8 @@ import { WinStateContext } from "./winStateContext";
 
 const GameContext = createContext();
 
-const GameState = (props) => {
-  const { showWinState, setWinStateMode, hideWinState } =
-    useContext(WinStateContext);
+const GameState = props => {
+  const { showWinState, setWinStateMode, hideWinState } = useContext(WinStateContext);
 
   const [screen, setScreen] = useState("start");
 
@@ -23,18 +22,27 @@ const GameState = (props) => {
 
   useEffect(() => {
     checkNoWinner();
+
     const currentUser = xnext ? "o" : "x";
     if (playMode === "cpu" && currentUser !== activeUser && !winner) {
       cpuNextCpu(squares);
     }
-  }, [xnext, winner, screen]); 
+    // If you don't know the details of
+    // how the useEffect hook works,
+    // you should listen to the eslint
+    // warning and add all the dependecies here
 
-  const changePlayMode = (mode) => {
+    // Furthermore, you should update the callback
+    // code to execute its contents only if
+    // the dependencies that interest you change.
+  }, [xnext, winner, screen]);
+
+  const changePlayMode = mode => {
     setPlayMode(mode);
     setScreen("game");
   };
 
-  const handleSquareClick = (ix) => {
+  const handleSquareClick = ix => {
     if (squares[ix] || winner) {
       return;
     }
@@ -51,7 +59,7 @@ const GameState = (props) => {
     checkWinner(ns);
   };
 
-  const checkWinner = (ns) => {
+  const checkWinner = ns => {
     const isWinner = calcWinner(ns);
     if (isWinner) {
       setWinner(isWinner.winner);
@@ -66,7 +74,7 @@ const GameState = (props) => {
   };
 
   const checkNoWinner = () => {
-    const moves = squares.filter((sq) => sq === "");
+    const moves = squares.filter(sq => sq === "");
     if (moves.length === 0) {
       setWinner("no");
       showWinState();
@@ -93,14 +101,13 @@ const GameState = (props) => {
     hideWinState();
   };
 
-  const cpuNextCpu = (sq) => {
+  const cpuNextCpu = sq => {
     const bestMove = calcBestMove(sq, activeUser === "x" ? "o" : "x");
     let ns = [...squares];
-    ns[bestMove] = !xnext ? 'x' : 'o';
+    ns[bestMove] = !xnext ? "x" : "o";
     setSquares(ns);
     setXnext(!xnext);
     checkWinner(ns);
-
   };
   return (
     <GameContext.Provider
